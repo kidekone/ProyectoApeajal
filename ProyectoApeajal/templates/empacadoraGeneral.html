@@ -1,0 +1,45 @@
+{% load static %}
+{% include "index.html" %}
+{% block title %} <h1></h1> {% endblock %}
+
+<div class="container">
+  <div class="card text-center w-90 hadow p-3 mb-5 shadow p-3 mb-5">
+    <div class="card-header">
+      Estadísticas de exportación
+    </div>
+    <div class="card-body">
+      <img src="{% static '\imagenes\empacadora_General.png'%}" height="500px" />
+      <a href="{% static '\imagenes\empacadora_General.png'%}" download="empacadora_General.png" class="btn btn-primary">Descargar imagen</a>
+    </div>
+  </div>
+</div>
+
+{% block content %}
+
+<div class="container">
+  <div class="card text-center w-90 shadow p-3 mb-5">
+      <div class="card-header">
+        Tabla de valores
+      </div>
+      <div class="card-body">
+        <div class="container mt-1 w-60 p-4">
+          {{tabla|safe}}
+          <!-- change -->
+        </div>
+      </div>
+  </div>
+</div>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    $('#empacadoras').DataTable();
+  });
+</script>
+{% endblock %}
