@@ -17,7 +17,7 @@ from django.contrib import messages
 
 def index(request):
     if request.user.is_authenticated:
-        datos = pd.read_csv("ProyectoApeajal\static\csv\PruebaContinentes.csv")
+        datos = pd.read_csv("ProyectoApeajal\static\csv\certificados.csv")
         df = pd.DataFrame({"Cantidad":datos["Cantidad"], "Empacadora":datos["Empacadora"],})
             
         df = df.groupby(["Empacadora"], as_index=False)['Cantidad'].sum()
@@ -26,7 +26,7 @@ def index(request):
         df = pd.DataFrame({"Empacadora":df['Empacadora']})
         df = df['Empacadora'].tolist()
         
-        datosP = pd.read_csv("ProyectoApeajal\static\csv\PruebaContinentes.csv")
+        datosP = pd.read_csv("ProyectoApeajal\static\csv\certificados.csv")
         dfP = pd.DataFrame({"Cantidad":datosP["Cantidad"], "Pais":datosP["País Destino"],})        
         dfP = dfP.groupby(["Pais"], as_index=False)['Cantidad'].sum()
         dfP = pd.DataFrame(dfP)
@@ -107,7 +107,7 @@ def paises(request):
         return redirect("/login/")
 
 def listaPaises():
-    datos = pd.read_csv("ProyectoApeajal\static\csv\PruebaContinentes.csv")
+    datos = pd.read_csv("ProyectoApeajal\static\csv\certificados.csv")
     df = pd.DataFrame({"Cantidad":datos["Cantidad"], "Pais":datos["País Destino"],})        
     df = df.groupby(["Pais"], as_index=False)['Cantidad'].sum()
     df = pd.DataFrame(df)
@@ -121,7 +121,7 @@ def listaPaises():
 def empacadorasIndividual(request):
     if request.user.is_authenticated:
         plt.close()
-        datos = pd.read_csv("ProyectoApeajal\static\csv\PruebaContinentes.csv")
+        datos = pd.read_csv("ProyectoApeajal\static\csv\certificados.csv")
         df = pd.DataFrame({"Empacadora":datos["Empacadora"], 'Fecha':pd.to_datetime(datos["Fecha expedición"],format='%d/%m/%Y'), "Variedad":datos["Variedad"], "Cantidad":datos["Cantidad"], "Unidad":datos["Uni. Medida"], "idGrupo":datos["Id Predicción"]})
         df.loc[(df.Unidad=="Kilogramos"),'Cantidad']=(df['Cantidad']/1000)
         df.loc[(df.Unidad=="Kilogramos"),'Unidad']="Toneladas"
@@ -169,10 +169,6 @@ def empacadorasIndividual(request):
         plt.title("Gráfica de exportacion de la empacadora: "+v_empacadora)
         fig.figimage(im, 475, 200, zorder=3, alpha=.2)
         plt.legend()
-        #mng = plt.get_current_fig_manager()
-        #mng.window.state("zoomed")
-        #plt.show()
-
         fig.savefig('ProyectoApeajal\static\imagenes\empacadora_Invidivual.png')
         
         tabla = tabla.to_html(classes='table table-striped', col_space=3)
@@ -187,7 +183,7 @@ def empacadorasIndividual(request):
 def empacadorasGeneral(request):
     if request.user.is_authenticated:
         plt.close()
-        datos = pd.read_csv("ProyectoApeajal\static\csv\PruebaContinentes.csv")
+        datos = pd.read_csv("ProyectoApeajal\static\csv\certificados.csv")
         df = pd.DataFrame({"Empacadora":datos["Empacadora"], 'Fecha':pd.to_datetime(datos["Fecha expedición"],format='%d/%m/%Y'), "Variedad":datos["Variedad"], "Cantidad":datos["Cantidad"], "Unidad":datos["Uni. Medida"], "idGrupo":datos["Id Predicción"]})
         df.loc[(df.Unidad=="Kilogramos"),'Cantidad']=(df['Cantidad']/1000)
         df.loc[(df.Unidad=="Kilogramos"),'Unidad']="Toneladas"
@@ -250,7 +246,7 @@ def empacadorasGeneral(request):
 def destinosTemporada(request):
     if request.user.is_authenticated:
         plt.close()
-        datos = pd.read_csv("ProyectoApeajal\static\csv\PruebaContinentes.csv")
+        datos = pd.read_csv("ProyectoApeajal\static\csv\certificados.csv")
         df = pd.DataFrame({'Fecha':pd.to_datetime(datos["Fecha expedición"],format='%d/%m/%Y'), 
                    "Variedad":datos["Variedad"], 
                    "Cantidad":datos["Cantidad"], 
@@ -319,7 +315,7 @@ def destinosTemporada(request):
 def paisesTemporada(request):
     if request.user.is_authenticated:
         plt.close()
-        datos = pd.read_csv("ProyectoApeajal\static\csv\PruebaContinentes.csv")
+        datos = pd.read_csv("ProyectoApeajal\static\csv\certificados.csv")
         df = pd.DataFrame({"Empacadora":datos["Empacadora"], 'Fecha':pd.to_datetime(datos["Fecha expedición"],format='%d/%m/%Y'), "Variedad":datos["Variedad"], "Cantidad":datos["Cantidad"], "Unidad":datos["Uni. Medida"], "Pais":datos["País Destino"],})
         
         df.loc[(df.Unidad=="Kilogramos"),'Cantidad']=(df['Cantidad']/1000)
@@ -410,7 +406,7 @@ def pronosticoPaises(request):
         tipoGrafica = request.POST.get("tipoGrafica")
         tipoPronostico = request.POST.get("tipoPronostico")
 
-        datos = pd.read_csv("ProyectoApeajal\static\csv\PruebaContinentes.csv")
+        datos = pd.read_csv("ProyectoApeajal\static\csv\certificados.csv")
 
         datos = pd.DataFrame({'Fecha':pd.to_datetime(datos["Fecha expedición"],format='%d/%m/%Y'), 
                    "Variedad":datos["Variedad"], 
@@ -545,7 +541,7 @@ def pronosticoPaisesGeneral(request):
         tipoGrafica = request.POST.get("tipoGrafica")
         tipoPronostico = request.POST.get("tipoPronostico")
         print(paisR)
-        datos = pd.read_csv("ProyectoApeajal\static\csv\PruebaContinentes.csv")
+        datos = pd.read_csv("ProyectoApeajal\static\csv\certificados.csv")
 
         datos = pd.DataFrame({'Fecha':pd.to_datetime(datos["Fecha expedición"],format='%d/%m/%Y'), 
                    "Variedad":datos["Variedad"], 
@@ -670,7 +666,7 @@ def pronosticoEmpacadora(request):
         empacadora = request.POST.get("empacadora")
         tipoGrafica = request.POST.get("tipoGrafica")
         tipoPronostico = request.POST.get("tipoPronostico")
-        datos = pd.read_csv("ProyectoApeajal\static\csv\PruebaContinentes.csv")
+        datos = pd.read_csv("ProyectoApeajal\static\csv\certificados.csv")
 
         datos = pd.DataFrame({"Empacadora":datos["Empacadora"], 
                     'Fecha':pd.to_datetime(datos["Fecha expedición"],format='%d/%m/%Y'), 
@@ -791,7 +787,7 @@ def pronosticoGeneral(request):
         plt.close()
         tipoGrafica = request.POST.get("tipoGrafica")
         tipoPronostico = request.POST.get("tipoPronostico")
-        datos = pd.read_csv("ProyectoApeajal\static\csv\PruebaContinentes.csv")
+        datos = pd.read_csv("ProyectoApeajal\static\csv\certificados.csv")
 
         datos = pd.DataFrame({ 'Fecha':pd.to_datetime(datos["Fecha expedición"],format='%d/%m/%Y'), 
                    "Cantidad":datos["Cantidad"], 
@@ -910,8 +906,8 @@ def simple_upload(request):
         name = str(myfile.name)
         print(name)
         
-        if os.path.exists("ProyectoApeajal/static/csv/archivo.csv"):
-            os.remove("ProyectoApeajal/static/csv/archivo.csv")
+        if os.path.exists("ProyectoApeajal/static/csv/certificados.csv"):
+            os.remove("ProyectoApeajal/static/csv/certificados.csv")
         fs = FileSystemStorage()
         filename = fs.save("certificados.csv",myfile)
         uploaded_file_url = fs.url(filename)
