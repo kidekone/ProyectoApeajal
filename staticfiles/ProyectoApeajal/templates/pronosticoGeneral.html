@@ -1,0 +1,30 @@
+{% load static %}
+{% include "index.html" %}
+{% include "modals.html" %}
+{% block title %} <h1></h1> {% endblock %}
+
+<div class="container">
+  <div class="card text-center w-90 hadow p-3 mb-5 shadow p-3 mb-5">
+    <div class="card-header">
+      Estadísticas de exportación
+    </div>
+    <div class="card-body ">
+      <img src="{% static '\imagenes\pronostico_General.png'%}" height="500px" />
+      <a href="{% static '\imagenes\pronostico_General.png'%}" download="pronostico_General.png" class="btn btn-primary">Descargar imagen</a>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="card text-center w-90 shadow p-3 mb-5">
+      <div class="card-header">
+          Tabla de valores
+      </div>
+      <div class="card-body">
+        <div class="container mt-1 w-60 p-4">
+          {{tabla|safe}}
+          <!-- change -->
+        </div>
+      </div>
+  </div>
+</div>
