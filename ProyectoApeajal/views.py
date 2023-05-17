@@ -17,6 +17,7 @@ from django.contrib import messages
 
 def index(request):
     if request.user.is_authenticated:
+        datos=1
         datos = pd.read_csv("/home/apeajal/Apeajal/staticfiles/csv/certificados.csv")
         df = pd.DataFrame({"Cantidad":datos["Cantidad"], "Empacadora":datos["Empacadora"],})
             
