@@ -17,7 +17,7 @@ from django.contrib import messages
 
 def index(request):
     if request.user.is_authenticated:
-        datos = pd.read_csv("/home/apeajal/Apeajal/staticfiles/csv/certificados.csv")
+        datos = pd.read_csv("ProyectoApeajal\\static\\csv\\certificados.csv")
         df = pd.DataFrame({"Cantidad":datos["Cantidad"], "Empacadora":datos["Empacadora"],})
             
         df = df.groupby(["Empacadora"], as_index=False)['Cantidad'].sum()
@@ -26,7 +26,7 @@ def index(request):
         df = pd.DataFrame({"Empacadora":df['Empacadora']})
         df = df['Empacadora'].tolist()
         
-        datosP = pd.read_csv("/home/apeajal/Apeajal/staticfiles/csv/certificados.csv")
+        datosP = pd.read_csv("ProyectoApeajal\\static\\csv\\certificados.csv")
         dfP = pd.DataFrame({"Cantidad":datosP["Cantidad"], "Pais":datosP["País Destino"],})        
         dfP = dfP.groupby(["Pais"], as_index=False)['Cantidad'].sum()
         dfP = pd.DataFrame(dfP)
