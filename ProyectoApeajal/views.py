@@ -108,7 +108,7 @@ def paises(request):
         return redirect("/login/")
 
 def listaPaises():
-    datos = pd.read_csv("/home/apeajal/Apeajal/static/csv/certificados.csv")
+    datos = pd.read_csv("ProyectoApeajal/static/csv/certificados.csv")
     df = pd.DataFrame({"Cantidad":datos["Cantidad"], "Pais":datos["País Destino"],})        
     df = df.groupby(["Pais"], as_index=False)['Cantidad'].sum()
     df = pd.DataFrame(df)
@@ -122,7 +122,7 @@ def listaPaises():
 def empacadorasIndividual(request):
     if request.user.is_authenticated:
         plt.close()
-        datos = pd.read_csv("/home/apeajal/Apeajal/static/csv/certificados.csv")
+        datos = pd.read_csv("ProyectoApeajal/static/csv/certificados.csv")
         df = pd.DataFrame({"Empacadora":datos["Empacadora"], 'Fecha':pd.to_datetime(datos["Fecha expedición"],format='%d/%m/%Y'), "Variedad":datos["Variedad"], "Cantidad":datos["Cantidad"], "Unidad":datos["Uni. Medida"], "idGrupo":datos["Id Predicción"]})
         df.loc[(df.Unidad=="Kilogramos"),'Cantidad']=(df['Cantidad']/1000)
         df.loc[(df.Unidad=="Kilogramos"),'Unidad']="Toneladas"
@@ -160,7 +160,7 @@ def empacadorasIndividual(request):
 
         valores = user1['Cantidad']
         valores1 = user2['Cantidad']
-        im = image.imread('/home/apeajal/Apeajal/static/imagenes/marcadeagua.png')
+        im = image.imread('ProyectoApeajal/static/imagenes/marcadeagua.png')
         fig = plt.figure(figsize =(12,6))
         plt.barh('Hass',valores1,0.3,label="Periodo Dic- May Tipo: Hass",color="green")
         plt.barh('Méndez',valores,0.3,label="Periodo Jun- Nov Tipo: Méndez",color="#FDBD31")
@@ -170,7 +170,7 @@ def empacadorasIndividual(request):
         plt.title("Gráfica de exportacion de la empacadora: "+v_empacadora)
         fig.figimage(im, 475, 200, zorder=3, alpha=.2)
         plt.legend()
-        fig.savefig('/home/apeajal/Apeajal/static/imagenes/empacadora_Invidivual.png')
+        fig.savefig('ProyectoApeajal/static/imagenes/empacadora_Invidivual.png')
         
         tabla = tabla.to_html(classes='table table-striped', col_space=3)
         context = {'tabla': tabla}  # change
@@ -184,7 +184,7 @@ def empacadorasIndividual(request):
 def empacadorasGeneral(request):
     if request.user.is_authenticated:
         plt.close()
-        datos = pd.read_csv("/home/apeajal/Apeajal/static/csv/certificados.csv")
+        datos = pd.read_csv("ProyectoApeajal/static/csv/certificados.csv")
         df = pd.DataFrame({"Empacadora":datos["Empacadora"], 'Fecha':pd.to_datetime(datos["Fecha expedición"],format='%d/%m/%Y'), "Variedad":datos["Variedad"], "Cantidad":datos["Cantidad"], "Unidad":datos["Uni. Medida"], "idGrupo":datos["Id Predicción"]})
         df.loc[(df.Unidad=="Kilogramos"),'Cantidad']=(df['Cantidad']/1000)
         df.loc[(df.Unidad=="Kilogramos"),'Unidad']="Toneladas"
@@ -247,7 +247,7 @@ def empacadorasGeneral(request):
 def destinosTemporada(request):
     if request.user.is_authenticated:
         plt.close()
-        datos = pd.read_csv("/home/apeajal/Apeajal/static/csv/certificados.csv")
+        datos = pd.read_csv("ProyectoApeajal/static/csv/certificados.csv")
         df = pd.DataFrame({'Fecha':pd.to_datetime(datos["Fecha expedición"],format='%d/%m/%Y'), 
                    "Variedad":datos["Variedad"], 
                    "Cantidad":datos["Cantidad"], 
