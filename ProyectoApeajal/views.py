@@ -220,7 +220,7 @@ def empacadorasGeneral(request):
         valores = periodo1['Cantidad']
         valores1 = periodo2['Cantidad']
 
-        im = image.imread('ProyectoApeajal\\static\\imagenes\\marcadeagua.png')
+        im = image.imread('ProyectoApeajal/static/imagenes/marcadeagua.png')
 
         fig = plt.figure(figsize =(12,6))
         plt.barh(periodo1['Empacadora'], valores, 0.3, align='edge',label="Periodo Jun- Nov Tipo: Méndez", color="darkgreen")
@@ -233,7 +233,7 @@ def empacadorasGeneral(request):
         plt.subplots_adjust(left=0.300, bottom=0.16, right=0.9, top=0.88, wspace=0.2, hspace=0.2)
         #plt.show()
         
-        fig.savefig('ProyectoApeajal\static\imagenes\empacadora_General.png')
+        fig.savefig('ProyectoApeajal/static/imagenes/empacadora_General.png')
         
         tabla = tabla.to_html(classes='table table-striped', table_id="empacadoras")
         context = {'tabla': tabla}  # change
@@ -285,7 +285,7 @@ def destinosTemporada(request):
         continentes = ["Medio Oriente","América","Europa","Asia"]
         x = np.arange(len(continentes))
     
-        im = image.imread('ProyectoApeajal\\static\\imagenes\\marcadeagua.png')
+        im = image.imread('ProyectoApeajal/static/imagenes/marcadeagua.png')
         x = np.arange(len(continentes))
         
         fig = plt.figure(figsize =(12,6))
@@ -302,7 +302,7 @@ def destinosTemporada(request):
         plt.legend()
         #plt.show()
 
-        fig.savefig('ProyectoApeajal\static\imagenes\destinos_Temporada.png')
+        fig.savefig('ProyectoApeajal/static/imagenes/destinos_Temporada.png')
 
         tabla = tabla.to_html(classes='table table-striped', table_id="destinos")
         context = {'tabla': tabla}  # change
@@ -316,7 +316,7 @@ def destinosTemporada(request):
 def paisesTemporada(request):
     if request.user.is_authenticated:
         plt.close()
-        datos = pd.read_csv("/home/apeajal/Apeajal/static/csv/certificados.csv")
+        datos = pd.read_csv("ProyectoApeajal/static/csv/certificados.csv")
         df = pd.DataFrame({"Empacadora":datos["Empacadora"], 'Fecha':pd.to_datetime(datos["Fecha expedición"],format='%d/%m/%Y'), "Variedad":datos["Variedad"], "Cantidad":datos["Cantidad"], "Unidad":datos["Uni. Medida"], "Pais":datos["País Destino"],})
         
         df.loc[(df.Unidad=="Kilogramos"),'Cantidad']=(df['Cantidad']/1000)
@@ -365,7 +365,7 @@ def paisesTemporada(request):
         valores1 = periodo2['Cantidad']
 
     # Graficando valores
-        im = image.imread('ProyectoApeajal\\static\\imagenes\\marcadeagua.png')
+        im = image.imread('ProyectoApeajal/static/imagenes/marcadeagua.png')
         fig = plt.figure(figsize =(12,6))
         plt.barh('Hass',valores1,0.3,label="Periodo Dic- May Tipo: Hass",color="green")
         plt.barh('Méndez',valores,0.3,label="Periodo Jun- Nov Tipo: Méndez",color="#FDBD31")
@@ -377,7 +377,7 @@ def paisesTemporada(request):
         plt.legend()
         #plt.show()
 
-        fig.savefig('ProyectoApeajal\static\imagenes\paises_Temporada.png')
+        fig.savefig('ProyectoApeajal/static/imagenes/paises_Temporada.png')
         tabla = tabla.to_html(classes='table table-striped', table_id="pais")
         context = {'tabla': tabla}  # change
 
@@ -407,7 +407,7 @@ def pronosticoPaises(request):
         tipoGrafica = request.POST.get("tipoGrafica")
         tipoPronostico = request.POST.get("tipoPronostico")
 
-        datos = pd.read_csv("/home/apeajal/Apeajal/static/csv/certificados.csv")
+        datos = pd.read_csv("ProyectoApeajal/static/csv/certificados.csv")
 
         datos = pd.DataFrame({'Fecha':pd.to_datetime(datos["Fecha expedición"],format='%d/%m/%Y'), 
                    "Variedad":datos["Variedad"], 
@@ -492,7 +492,7 @@ def pronosticoPaises(request):
         tablaComparacion.set_index('Años', inplace = True)
         tablaPronostico = pd.DataFrame({"Años":arregloAños[longitudPeriodo:logFuturo], "Regresión Lineal":arregloLineal[longitudPeriodo:logFuturo], "Redes Neuronales":arregloRedes[longitudPeriodo:logFuturo]})
         tablaPronostico.set_index('Años', inplace = True)
-        im = image.imread('ProyectoApeajal\\static\\imagenes\\marcadeagua.png')
+        im = image.imread('ProyectoApeajal/static/imagenes/marcadeagua.png')
         plt.close()
         if tipoPronostico == "ventasReales":
             fig = plt.figure(figsize=(12, 6))
@@ -527,7 +527,7 @@ def pronosticoPaises(request):
         fig.figimage(im, 475, 200, zorder=3, alpha=.2)
         
 
-        fig.savefig('ProyectoApeajal\static\imagenes\pronostico_destino.png')
+        fig.savefig('ProyectoApeajal/static/imagenes/pronostico_destino.png')
         context = {'tabla': tabla}  # change
 
         return render(request, 'pronosticoPais.html',context)
@@ -542,7 +542,7 @@ def pronosticoPaisesGeneral(request):
         tipoGrafica = request.POST.get("tipoGrafica")
         tipoPronostico = request.POST.get("tipoPronostico")
         print(paisR)
-        datos = pd.read_csv("/home/apeajal/Apeajal/static/csv/certificados.csv")
+        datos = pd.read_csv("ProyectoApeajal/static/csv/certificados.csv")
 
         datos = pd.DataFrame({'Fecha':pd.to_datetime(datos["Fecha expedición"],format='%d/%m/%Y'), 
                    "Variedad":datos["Variedad"], 
@@ -620,7 +620,7 @@ def pronosticoPaisesGeneral(request):
         tablaComparacion.set_index('Años', inplace = True)
         tablaPronostico = pd.DataFrame({"Años":arregloAños[longitudPeriodo:logFuturo], "Regresión Lineal":arregloLineal[longitudPeriodo:logFuturo], "Redes Neuronales":arregloRedes[longitudPeriodo:logFuturo]})
         tablaPronostico.set_index('Años', inplace = True)
-        im = image.imread('ProyectoApeajal\\static\\imagenes\\marcadeagua.png')
+        im = image.imread('ProyectoApeajal/static/imagenes/marcadeagua.png')
         plt.close()
         if tipoPronostico == "ventasReales":
             fig = plt.figure(figsize=(12, 6))
@@ -655,7 +655,7 @@ def pronosticoPaisesGeneral(request):
         fig.figimage(im, 475, 200, zorder=3, alpha=.2)
         
 
-        fig.savefig('ProyectoApeajal\static\imagenes\pronostico_pais.png')
+        fig.savefig('ProyectoApeajal/static/imagenes/pronostico_pais.png')
         context = {'tabla': tabla}  # change
         return render(request, 'pronosticoGeneralPaises.html',context)
     else:
@@ -667,7 +667,7 @@ def pronosticoEmpacadora(request):
         empacadora = request.POST.get("empacadora")
         tipoGrafica = request.POST.get("tipoGrafica")
         tipoPronostico = request.POST.get("tipoPronostico")
-        datos = pd.read_csv("ProyectoApeajal\static\csv\certificados.csv")
+        datos = pd.read_csv("ProyectoApeajal/static/csv/certificados.csv")
 
         datos = pd.DataFrame({"Empacadora":datos["Empacadora"], 
                     'Fecha':pd.to_datetime(datos["Fecha expedición"],format='%d/%m/%Y'), 
@@ -742,7 +742,7 @@ def pronosticoEmpacadora(request):
         tablaComparacion.set_index('Años', inplace = True)
         tablaPronostico = pd.DataFrame({"Años":arregloAños[longitudPeriodo:logFuturo], "Regresión Lineal":arregloLineal[longitudPeriodo:logFuturo], "Redes Neuronales":arregloRedes[longitudPeriodo:logFuturo]})
         tablaPronostico.set_index('Años', inplace = True)
-        im = image.imread('ProyectoApeajal\\static\\imagenes\\marcadeagua.png')
+        im = image.imread('ProyectoApeajal/static/imagenes/marcadeagua.png')
         plt.close()
         if tipoPronostico == "ventasReales":
             fig = plt.figure(figsize=(12, 6))
@@ -777,7 +777,7 @@ def pronosticoEmpacadora(request):
         fig.figimage(im, 475, 200, zorder=3, alpha=.2)
         
 
-        fig.savefig('ProyectoApeajal\static\imagenes\pronostico_empacadora.png')
+        fig.savefig('ProyectoApeajal/static/imagenes/pronostico_empacadora.png')
         context = {'tabla': tabla}  # change
         return render(request, 'pronosticoEmpacadora.html', context)
     else:
@@ -788,7 +788,7 @@ def pronosticoGeneral(request):
         plt.close()
         tipoGrafica = request.POST.get("tipoGrafica")
         tipoPronostico = request.POST.get("tipoPronostico")
-        datos = pd.read_csv("/home/apeajal/Apeajal/static/csv/certificados.csv")
+        datos = pd.read_csv("ProyectoApeajal/static/csv/certificados.csv")
 
         datos = pd.DataFrame({ 'Fecha':pd.to_datetime(datos["Fecha expedición"],format='%d/%m/%Y'), 
                    "Cantidad":datos["Cantidad"], 
@@ -860,7 +860,7 @@ def pronosticoGeneral(request):
         tablaComparacion.set_index('Años', inplace = True)
         tablaPronostico = pd.DataFrame({"Años":arregloAños[longitudPeriodo:logFuturo], "Regresión Lineal":arregloLineal[longitudPeriodo:logFuturo], "Redes Neuronales":arregloRedes[longitudPeriodo:logFuturo]})
         tablaPronostico.set_index('Años', inplace = True)
-        im = image.imread('ProyectoApeajal\\static\\imagenes\\marcadeagua.png')
+        im = image.imread('ProyectoApeajal/static/imagenes/marcadeagua.png')
         plt.close()
         if tipoPronostico == "ventasReales":
             fig = plt.figure(figsize=(12, 6))
@@ -895,7 +895,7 @@ def pronosticoGeneral(request):
         fig.figimage(im, 475, 200, zorder=3, alpha=.2)
         
 
-        fig.savefig('ProyectoApeajal\static\imagenes\pronostico_General.png')
+        fig.savefig('ProyectoApeajal/static/imagenes/pronostico_General.png')
         context = {'tabla': tabla}  # change
         return render(request, 'pronosticoGeneral.html', context)
     else:
@@ -907,8 +907,8 @@ def simple_upload(request):
         name = str(myfile.name)
         print(name)
         
-        if os.path.exists("/home/apeajal/Apeajal/static/csv/certificados.csv"):
-            os.remove("/home/apeajal/Apeajal/static/csv/certificados.csv")
+        if os.path.exists("ProyectoApeajal/static/csv/certificados.csv"):
+            os.remove("ProyectoApeajal/static/csv/certificados.csv")
         fs = FileSystemStorage()
         filename = fs.save("certificados.csv",myfile)
         uploaded_file_url = fs.url(filename)
