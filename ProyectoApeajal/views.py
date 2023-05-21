@@ -592,7 +592,7 @@ def pronosticoPaisesGeneral(request):
         model.compile(optimizer=tf.keras.optimizers.Adam(1),
                         loss='mean_squared_error')
         print("Entrenando el modelo")
-        epochs_hist = model.fit(X_train, y_train, epochs=26310)
+        epochs_hist = model.fit(X_train, y_train, epochs=100)
 
         print("Evaluando el modelo entrenado")
         print("Keys:")
