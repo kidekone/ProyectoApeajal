@@ -19,6 +19,8 @@ from django.urls import path
 from ProyectoApeajal import views
 from ProyectoApeajal.views import index
 from django.conf.urls.static import static
+from django.conf import settings
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/',views.login_request),
@@ -40,4 +42,4 @@ urlpatterns = [
     path('empacadorasIndividual/',views.empacadorasIndividual),
     path('empacadoraI/',views.empacadoraI),
     path('subirArchivo/',views.simple_upload),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
