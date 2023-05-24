@@ -42,4 +42,4 @@ urlpatterns = [
     path('empacadorasIndividual/',views.empacadorasIndividual),
     path('empacadoraI/',views.empacadoraI),
     path('subirArchivo/',views.simple_upload),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]
