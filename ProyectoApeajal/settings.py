@@ -127,7 +127,7 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'ProyectoApeajal/static'),)
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #Media root
-STATIC_URL = 'static/'
+STATIC_URL = 'ProyectoApeajal/static/'
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
 MEDIA_URL="/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, 'ProyectoApeajal/static/csv')
