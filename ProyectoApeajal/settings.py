@@ -122,15 +122,14 @@ LOGOUT_REDIRECT_URL=reverse_lazy('login.html')
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'ProyectoApeajal/static'),)
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #Media root
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR, 'static']
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
 MEDIA_URL="/media/"
-#MEDIA_ROOT = os.path.join(BASE_DIR, 'ProyectoApeajal/static/csv')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'ProyectoApeajal/static/csv')
 
 
