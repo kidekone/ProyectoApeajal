@@ -319,7 +319,7 @@ def paisesTemporada(request):
         datos = pd.read_csv("ProyectoApeajal/static/csv/certificados.csv")
         df = pd.DataFrame({"Empacadora":datos["Empacadora"], 'Fecha':pd.to_datetime(datos["Fecha expedición"],format='%d/%m/%Y'), "Variedad":datos["Variedad"], "Cantidad":datos["Cantidad"], "Unidad":datos["Uni. Medida"], "Pais":datos["País Destino"],})
         
-        df.loc[(df.Unidad=="Kilogramos"),'Cantidad']=(df['Cantidad']/1000)
+        df.loc[(df.Unidad=="Kilogramos"),'Cantidad']=(df['Cantidad']/10000)
         df.loc[(df.Unidad=="Kilogramos"),'Unidad']="Toneladas"
 
     # Recibe el año seleccionado
