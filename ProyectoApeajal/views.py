@@ -170,7 +170,7 @@ def empacadorasIndividual(request):
         plt.title("Gráfica de exportacion de la empacadora: "+v_empacadora)
         fig.figimage(im, 475, 200, zorder=3, alpha=.2)
         plt.legend()
-        fig.savefig('ProyectoApeajal/static/imagenes/empacadora_Invidivualprueba.png')
+        fig.savefig('static/imagenes/empacadora_Invidivualprueba2.png')
         
         tabla = tabla.to_html(classes='table table-striped', col_space=3)
         context = {'tabla': tabla}  # change
