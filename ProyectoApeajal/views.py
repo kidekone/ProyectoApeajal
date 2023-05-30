@@ -123,7 +123,7 @@ def empacadorasIndividual(request):
     if request.user.is_authenticated:
         plt.close()
         datos = pd.read_csv("ProyectoApeajal/static/csv/certificados.csv")
-        df = pd.DataFrame({"Empacadora":datos["Empacadora"], 'Fecha':pd.to_datetime(datos["Fecha expedición"],format='%d/%m/%Y'), "Variedad":datos["Variedad"], "Cantidad":datos["Cantidad"], "Unidad":datos["Uni. Medida"], "idGrupo":datos["Id Predicción"]})
+        df = pd.DataFrame({"Empacadora":datos["Empacadora"], 'Fecha':datos["Fecha expedición"], "Variedad":datos["Variedad"], "Cantidad":datos["Cantidad"].str.replace(',', '').astype(float), "Unidad":datos["Uni. Medida"], "idGrupo":datos["Id Predicción"]})
         df.loc[(df.Unidad=="Kilogramos"),'Cantidad']=(df['Cantidad']/1000)
         df.loc[(df.Unidad=="Kilogramos"),'Unidad']="Toneladas"
 
