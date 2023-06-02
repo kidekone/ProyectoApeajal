@@ -170,7 +170,7 @@ def empacadorasIndividual(request):
         plt.title("Gráfica de exportacion de la empacadora: "+v_empacadora)
         fig.figimage(im, 475, 200, zorder=3, alpha=.2)
         plt.legend()
-        fig.savefig('static/imagenes/empacadora_Invidivualprueba2.png')
+        fig.savefig('static/imagenes/empacadora_Invidivual.png')
         
         tabla = tabla.to_html(classes='table table-striped', col_space=3)
         context = {'tabla': tabla}  # change
@@ -233,7 +233,7 @@ def empacadorasGeneral(request):
         plt.subplots_adjust(left=0.300, bottom=0.16, right=0.9, top=0.88, wspace=0.2, hspace=0.2)
         #plt.show()
         
-        fig.savefig('ProyectoApeajal/static/imagenes/empacadora_General.png')
+        fig.savefig('static/imagenes/empacadora_General.png')
         
         tabla = tabla.to_html(classes='table table-striped', table_id="empacadoras")
         context = {'tabla': tabla}  # change
@@ -302,7 +302,7 @@ def destinosTemporada(request):
         plt.legend()
         #plt.show()
 
-        fig.savefig('ProyectoApeajal/static/imagenes/destinos_Temporada.png')
+        fig.savefig('static/imagenes/destinos_Temporada.png')
 
         tabla = tabla.to_html(classes='table table-striped', table_id="destinos")
         context = {'tabla': tabla}  # change
@@ -377,7 +377,7 @@ def paisesTemporada(request):
         plt.legend()
         #plt.show()
 
-        fig.savefig('ProyectoApeajal/static/imagenes/paises_Temporada.png')
+        fig.savefig('static/imagenes/paises_Temporada.png')
         tabla = tabla.to_html(classes='table table-striped', table_id="pais")
         context = {'tabla': tabla}  # change
 
@@ -461,7 +461,7 @@ def pronosticoPaises(request):
                     loss='mean_squared_error')
 
         print("Entrenando el modelo")
-        epochs_hist = model.fit(X_train, y_train, epochs=26310)
+        epochs_hist = model.fit(X_train, y_train, epochs=15000)
 
         print("Evaluando el modelo entrenado")
         print("Keys:")
@@ -527,7 +527,7 @@ def pronosticoPaises(request):
         fig.figimage(im, 475, 200, zorder=3, alpha=.2)
         
 
-        fig.savefig('ProyectoApeajal/static/imagenes/pronostico_destino.png')
+        fig.savefig('static/imagenes/pronostico_destino.png')
         context = {'tabla': tabla}  # change
 
         return render(request, 'pronosticoPais.html',context)
@@ -592,7 +592,7 @@ def pronosticoPaisesGeneral(request):
         model.compile(optimizer=tf.keras.optimizers.Adam(1),
                         loss='mean_squared_error')
         print("Entrenando el modelo")
-        epochs_hist = model.fit(X_train, y_train, epochs=100)
+        epochs_hist = model.fit(X_train, y_train, epochs=15000)
 
         print("Evaluando el modelo entrenado")
         print("Keys:")
@@ -655,7 +655,7 @@ def pronosticoPaisesGeneral(request):
         fig.figimage(im, 475, 200, zorder=3, alpha=.2)
         
 
-        fig.savefig('ProyectoApeajal/static/imagenes/pronostico_pais.png')
+        fig.savefig('static/imagenes/pronostico_pais.png')
         context = {'tabla': tabla}  # change
         return render(request, 'pronosticoGeneralPaises.html',context)
     else:
@@ -714,7 +714,7 @@ def pronosticoEmpacadora(request):
         model.compile(optimizer=tf.keras.optimizers.Adam(1),
                         loss='mean_squared_error')
         print("Entrenando el modelo")
-        epochs_hist = model.fit(X_train, y_train, epochs=26310)
+        epochs_hist = model.fit(X_train, y_train, epochs=15000)
 
         print("Evaluando el modelo entrenado")
         print("Keys:")
@@ -777,7 +777,7 @@ def pronosticoEmpacadora(request):
         fig.figimage(im, 475, 200, zorder=3, alpha=.2)
         
 
-        fig.savefig('ProyectoApeajal/static/imagenes/pronostico_empacadora.png')
+        fig.savefig('static/imagenes/pronostico_empacadora.png')
         context = {'tabla': tabla}  # change
         return render(request, 'pronosticoEmpacadora.html', context)
     else:
@@ -832,7 +832,7 @@ def pronosticoGeneral(request):
         model.compile(optimizer=tf.keras.optimizers.Adam(1),
                         loss='mean_squared_error')
         print("Entrenando el modelo")
-        epochs_hist = model.fit(X_train, y_train, epochs=26310)
+        epochs_hist = model.fit(X_train, y_train, epochs=15000)
 
         print("Evaluando el modelo entrenado")
         print("Keys:")
@@ -895,7 +895,7 @@ def pronosticoGeneral(request):
         fig.figimage(im, 475, 200, zorder=3, alpha=.2)
         
 
-        fig.savefig('ProyectoApeajal/static/imagenes/pronostico_General.png')
+        fig.savefig('static/imagenes/pronostico_General.png')
         context = {'tabla': tabla}  # change
         return render(request, 'pronosticoGeneral.html', context)
     else:
