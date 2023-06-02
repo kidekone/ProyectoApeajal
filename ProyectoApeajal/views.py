@@ -454,7 +454,7 @@ def pronosticoPaises(request):
                     loss='mean_squared_error')
 
         print("Entrenando el modelo")
-        epochs_hist = model.fit(X_train, y_train, epochs=10000)
+        epochs_hist = model.fit(X_train, y_train, epochs=100)
 
         print("Evaluando el modelo entrenado")
         print("Keys:")
