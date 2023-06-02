@@ -256,6 +256,7 @@ def destinosTemporada(request):
         year = request.POST.get("year")
         date1p1=year+'-06-01'
         date2p1=year+'-11-30'
+
         date1p2=year+'-12-01'
         yearAux = int(year)
         yearAux = yearAux+1
