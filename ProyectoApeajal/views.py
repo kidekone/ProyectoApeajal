@@ -292,7 +292,7 @@ def destinosTemporada(request):
         plt.xticks(x+1.1,continentes)
         plt.xlabel('Continentes')
         plt.ylabel('Toneladas exportadas')
-        plt.title("Gráfica de  por temporada")
+        plt.title("Gráfica de destinos por temporada")
         fig.figimage(im, 475, 200, zorder=3, alpha=.2)
 
         plt.legend()
