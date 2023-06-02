@@ -185,7 +185,7 @@ def empacadorasGeneral(request):
     if request.user.is_authenticated:
         plt.close()
         datos = pd.read_csv("ProyectoApeajal/static/csv/certificados.csv")
-        df = pd.DataFrame({"Empacadora":datos["Empacadora"], 'Fecha':pd.to_datetime(datos["Fecha expedición"],format='%d/%m/%Y'), "Variedad":datos["Variedad"], "Cantidad":datos["Cantidad"], "Unidad":datos["Uni. Medida"], "idGrupo":datos["Id Predicción"]})
+        df = pd.DataFrame({"Empacadora":datos["Empacadora"], 'Fecha':datos["Fecha expedición"], "Variedad":datos["Variedad"], "Cantidad":datos["Cantidad"].str.replace(',', '').astype(float), "Unidad":datos["Uni. Medida"], "idGrupo":datos["Id Predicción"]})
         df.loc[(df.Unidad=="Kilogramos"),'Cantidad']=(df['Cantidad']/1000)
         df.loc[(df.Unidad=="Kilogramos"),'Unidad']="Toneladas"
         
@@ -248,11 +248,7 @@ def destinosTemporada(request):
     if request.user.is_authenticated:
         plt.close()
         datos = pd.read_csv("ProyectoApeajal/static/csv/certificados.csv")
-        df = pd.DataFrame({'Fecha':pd.to_datetime(datos["Fecha expedición"],format='%d/%m/%Y'), 
-                   "Variedad":datos["Variedad"], 
-                   "Cantidad":datos["Cantidad"], 
-                   "Unidad":datos["Uni. Medida"],
-                   "idContinente":datos["Id Continente"]})
+        df = pd.DataFrame({'Fecha':datos["Fecha expedición"], "Variedad":datos["Variedad"], "Cantidad":datos["Cantidad"].str.replace(',', '').astype(float), "Unidad":datos["Uni. Medida"],"idContinente":datos["Id Continente"]})
 
         df.loc[(df.Unidad=="Kilogramos"),'Cantidad']=(df['Cantidad']/1000)
         df.loc[(df.Unidad=="Kilogramos"),'Unidad']="Toneladas"
@@ -409,11 +405,7 @@ def pronosticoPaises(request):
 
         datos = pd.read_csv("ProyectoApeajal/static/csv/certificados.csv")
 
-        datos = pd.DataFrame({'Fecha':pd.to_datetime(datos["Fecha expedición"],format='%d/%m/%Y'), 
-                   "Variedad":datos["Variedad"], 
-                   "Cantidad":datos["Cantidad"], 
-                   "Unidad":datos["Uni. Medida"],
-                   "idContinente":datos["Id Continente"]})
+        datos = pd.DataFrame({'Fecha':datos["Fecha expedición"], "Variedad":datos["Variedad"], "Cantidad":datos["Cantidad"].str.replace(',', '').astype(float), "Unidad":datos["Uni. Medida"],"idContinente":datos["Id Continente"]})
         
         datos.loc[(datos.Unidad=="Kilogramos"),'Cantidad']=(datos['Cantidad']/1000)
         datos.loc[(datos.Unidad=="Kilogramos"),'Unidad']="Toneladas"
@@ -544,11 +536,7 @@ def pronosticoPaisesGeneral(request):
         print(paisR)
         datos = pd.read_csv("ProyectoApeajal/static/csv/certificados.csv")
 
-        datos = pd.DataFrame({'Fecha':pd.to_datetime(datos["Fecha expedición"],format='%d/%m/%Y'), 
-                   "Variedad":datos["Variedad"], 
-                   "Cantidad":datos["Cantidad"], 
-                   "Unidad":datos["Uni. Medida"],
-                    "Destino": datos["País Destino"]})
+        datos = pd.DataFrame({'Fecha':datos["Fecha expedición"], "Variedad":datos["Variedad"], "Cantidad":datos["Cantidad"].str.replace(',', '').astype(float), "Unidad":datos["Uni. Medida"],"Destino": datos["País Destino"]})
 
         datos.loc[(datos.Unidad=="Kilogramos"),'Cantidad']=(datos['Cantidad']/1000)
         datos.loc[(datos.Unidad=="Kilogramos"),'Unidad']="Toneladas"
@@ -669,11 +657,7 @@ def pronosticoEmpacadora(request):
         tipoPronostico = request.POST.get("tipoPronostico")
         datos = pd.read_csv("ProyectoApeajal/static/csv/certificados.csv")
 
-        datos = pd.DataFrame({"Empacadora":datos["Empacadora"], 
-                    'Fecha':pd.to_datetime(datos["Fecha expedición"],format='%d/%m/%Y'), 
-                    "Variedad":datos["Variedad"], 
-                    "Cantidad":datos["Cantidad"], 
-                    "Unidad":datos["Uni. Medida"]})
+        datos = pd.DataFrame({"Empacadora":datos["Empacadora"], 'Fecha':datos["Fecha expedición"], "Variedad":datos["Variedad"], "Cantidad":datos["Cantidad"].str.replace(',', '').astype(float), "Unidad":datos["Uni. Medida"]})
 
         datos.loc[(datos.Unidad=="Kilogramos"),'Cantidad']=(datos['Cantidad']/1000)
         datos.loc[(datos.Unidad=="Kilogramos"),'Unidad']="Toneladas"
@@ -790,9 +774,7 @@ def pronosticoGeneral(request):
         tipoPronostico = request.POST.get("tipoPronostico")
         datos = pd.read_csv("ProyectoApeajal/static/csv/certificados.csv")
 
-        datos = pd.DataFrame({ 'Fecha':pd.to_datetime(datos["Fecha expedición"],format='%d/%m/%Y'), 
-                   "Cantidad":datos["Cantidad"], 
-                   "Unidad":datos["Uni. Medida"]})
+        datos = pd.DataFrame({ 'Fecha':datos["Fecha expedición"], "Cantidad":datos["Cantidad"].str.replace(',', '').astype(float), "Unidad":datos["Uni. Medida"]})
 
         datos.loc[(datos.Unidad=="Kilogramos"),'Cantidad']=(datos['Cantidad']/1000)
         datos.loc[(datos.Unidad=="Kilogramos"),'Unidad']="Toneladas"
