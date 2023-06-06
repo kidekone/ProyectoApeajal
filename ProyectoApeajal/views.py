@@ -294,7 +294,6 @@ def destinosTemporada(request):
         plt.xlabel('Continentes')
         plt.ylabel('Toneladas exportadas')
         plt.title('Reporte de exportación de los continentes en el año '+year)
-        plt.subplots_adjust(left=0.300, bottom=0.16, right=0.9, top=0.88, wspace=0.2, hspace=0.2)
         fig.figimage(im, 475, 200, zorder=3, alpha=.2)
         plt.legend()
         #plt.show()
@@ -453,7 +452,7 @@ def pronosticoPaises(request):
                     loss='mean_squared_error')
 
         print("Entrenando el modelo")
-        epochs_hist = model.fit(X_train, y_train, epochs=100)
+        epochs_hist = model.fit(X_train, y_train, epochs=10000)
 
         print("Evaluando el modelo entrenado")
         print("Keys:")
