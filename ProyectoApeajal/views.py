@@ -247,6 +247,7 @@ def empacadorasGeneral(request):
 def destinosTemporada(request):
     if request.user.is_authenticated:
         plt.close()
+
         datos = pd.read_csv("ProyectoApeajal/static/csv/certificados.csv")
         df = pd.DataFrame({'Fecha':datos["Fecha expedición"], "Variedad":datos["Variedad"], "Cantidad":datos["Cantidad"].str.replace(',', '').astype(float), "Unidad":datos["Uni. Medida"],"idContinente":datos["Id Continente"]})
 
@@ -256,7 +257,6 @@ def destinosTemporada(request):
         year = request.POST.get("year")
         date1p1=year+'-06-01'
         date2p1=year+'-11-30'
-
         date1p2=year+'-12-01'
         yearAux = int(year)
         yearAux = yearAux+1
@@ -265,40 +265,35 @@ def destinosTemporada(request):
 
         periodo1 =df.loc[df["Fecha"].between(date1p1, date2p1) &(df["Variedad"]=="Méndez")]
         periodo1 = pd.DataFrame(periodo1)
-        periodo1 = periodo1.groupby(["idContinente"], as_index=False)['Cantidad'].sum()
+        periodo1 = periodo1.groupby(["Continente"], as_index=False)['Cantidad'].sum()
         periodo1 = pd.DataFrame(periodo1)
 
         periodo2 =df.loc[df["Fecha"].between(date1p2, date2p2) &(df["Variedad"]=="Hass")]
         periodo2 = pd.DataFrame(periodo2)
-        periodo2 = df.groupby(["idContinente"], as_index=False)['Cantidad'].sum()
+        periodo2 = periodo2.groupby(["Continente"], as_index=False)['Cantidad'].sum()
         periodo2 = pd.DataFrame(periodo2)
 
-        continentes = ["Medio Oriente","América","Europa","Asia"]
+        continente = df.groupby('Continente',as_index=False)["Cantidad"].sum()
         pd.options.display.float_format = '{:,.2f}'.format
-        tabla = pd.DataFrame({"continentes":continentes,"Cantidad Mendéz":periodo1.Cantidad, "Cantidad Hass":periodo2.Cantidad})
-        tabla.set_index('continentes', inplace = True)
-        valores = periodo1['Cantidad']
-        valores1 = periodo2['Cantidad']
-        continentes = ["Medio Oriente","América","Europa","Asia"]
-        x = np.arange(len(continentes))
+        tabla = pd.DataFrame({"Continente":continente.Continente,"Cantidad Mendéz":periodo1.Cantidad,"Cantidad Hass":periodo2.Cantidad})
+        tabla.set_index('Continente', inplace = True)
     
         im = image.imread('ProyectoApeajal/static/imagenes/marcadeagua.png')
-        x = np.arange(len(continentes))
-        
         fig = plt.figure(figsize =(12,6))
         
-        
-        plt.bar(periodo2['idContinente']+0.00,valores1,0.2,label="Periodo Dic- May Tipo: Hass",color="green")
-        plt.bar(periodo1['idContinente']+0.20,valores,0.2,label="Periodo Jun- Nov Tipo: Méndez",color="#FDBD31")
-        plt.xticks(x+1.1,continentes)
+        valores = periodo1['Cantidad']
+        valores1 = periodo2['Cantidad']
+
+        fig = plt.figure(figsize =(12,6))
+        plt.bar(periodo1['Continente'], valores, 0.3, align='edge',label="Periodo Jun- Nov Tipo: Méndez", color="darkgreen")
+        plt.bar(periodo2['Continente'], valores1, 0.3, align='center',label="Periodo Dic- May Tipo: Hass", color="darkorange")
         plt.xlabel('Continentes')
         plt.ylabel('Toneladas exportadas')
-        plt.title("Gráfica de destinos por temporada")
+        plt.title('Reporte de exportación de los continentes en el año '+year)
+        plt.subplots_adjust(left=0.300, bottom=0.16, right=0.9, top=0.88, wspace=0.2, hspace=0.2)
         fig.figimage(im, 475, 200, zorder=3, alpha=.2)
-
         plt.legend()
         #plt.show()
-
         fig.savefig('static/imagenes/destinos_Temporada.png')
 
         tabla = tabla.to_html(classes='table table-striped', table_id="destinos")
