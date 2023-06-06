@@ -249,7 +249,11 @@ def destinosTemporada(request):
         plt.close()
 
         datos = pd.read_csv("ProyectoApeajal/static/csv/certificados.csv")
-        df = pd.DataFrame({'Fecha':datos["Fecha expedición"], "Variedad":datos["Variedad"], "Cantidad":datos["Cantidad"].str.replace(',', '').astype(float), "Unidad":datos["Uni. Medida"],"idContinente":datos["Id Continente"]})
+        df = pd.DataFrame({'Fecha':pd.to_datetime(datos["Fecha expedición"]), 
+                   "Variedad":datos["Variedad"], 
+                   "Cantidad":datos["Cantidad"].str.replace(',', '').astype(float), 
+                   "Unidad":datos["Uni. Medida"],
+                   "Continente":datos["Continente"]})
 
         df.loc[(df.Unidad=="Kilogramos"),'Cantidad']=(df['Cantidad']/1000)
         df.loc[(df.Unidad=="Kilogramos"),'Unidad']="Toneladas"
