@@ -452,7 +452,7 @@ def pronosticoPaises(request):
                     loss='mean_squared_error')
 
         print("Entrenando el modelo")
-        epochs_hist = model.fit(X_train, y_train, epochs=5000)
+        epochs_hist = model.fit(X_train, y_train, epochs=6000)
 
         print("Evaluando el modelo entrenado")
         print("Keys:")
@@ -500,7 +500,7 @@ def pronosticoPaises(request):
                 plt.plot(datos['Periodo'], arregloLineal[0:longitudPeriodo],label="Predicción: Regresión lineal", color="#C1CA31")
                 plt.plot(datos['Periodo'], arregloRedes[0:longitudPeriodo],label="Predicción: Redes Neuronales",color="#41A148")
         else:
-            fig = plt.figure(figsize=(12, 10))
+            fig = plt.figure(figsize=(12, 6))
             plt.title('Pronóstico de exportaciones futuras al Continente ' + destino)
             plt.ylabel('Toneladas de Aguacate a exportar')
             plt.xticks(datos2['Periodo']+0.10,arregloAños[longitudPeriodo:logFuturo])
@@ -516,8 +516,6 @@ def pronosticoPaises(request):
         plt.xlabel('Años')
         plt.legend()
         fig.figimage(im, 475, 200, zorder=3, alpha=.2)
-        
-
         fig.savefig('static/imagenes/pronostico_destino.png')
         context = {'tabla': tabla}  # change
 
@@ -579,7 +577,7 @@ def pronosticoPaisesGeneral(request):
         model.compile(optimizer=tf.keras.optimizers.Adam(1),
                         loss='mean_squared_error')
         print("Entrenando el modelo")
-        epochs_hist = model.fit(X_train, y_train, epochs=5000)
+        epochs_hist = model.fit(X_train, y_train, epochs=6000)
 
         print("Evaluando el modelo entrenado")
         print("Keys:")
@@ -697,7 +695,7 @@ def pronosticoEmpacadora(request):
         model.compile(optimizer=tf.keras.optimizers.Adam(1),
                         loss='mean_squared_error')
         print("Entrenando el modelo")
-        epochs_hist = model.fit(X_train, y_train, epochs=5000)
+        epochs_hist = model.fit(X_train, y_train, epochs=6000)
 
         print("Evaluando el modelo entrenado")
         print("Keys:")
