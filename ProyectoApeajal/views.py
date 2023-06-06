@@ -452,7 +452,7 @@ def pronosticoPaises(request):
                     loss='mean_squared_error')
 
         print("Entrenando el modelo")
-        epochs_hist = model.fit(X_train, y_train, epochs=8000)
+        epochs_hist = model.fit(X_train, y_train, epochs=5000)
 
         print("Evaluando el modelo entrenado")
         print("Keys:")
@@ -579,7 +579,7 @@ def pronosticoPaisesGeneral(request):
         model.compile(optimizer=tf.keras.optimizers.Adam(1),
                         loss='mean_squared_error')
         print("Entrenando el modelo")
-        epochs_hist = model.fit(X_train, y_train, epochs=8000)
+        epochs_hist = model.fit(X_train, y_train, epochs=5000)
 
         print("Evaluando el modelo entrenado")
         print("Keys:")
@@ -697,7 +697,7 @@ def pronosticoEmpacadora(request):
         model.compile(optimizer=tf.keras.optimizers.Adam(1),
                         loss='mean_squared_error')
         print("Entrenando el modelo")
-        epochs_hist = model.fit(X_train, y_train, epochs=8000)
+        epochs_hist = model.fit(X_train, y_train, epochs=5000)
 
         print("Evaluando el modelo entrenado")
         print("Keys:")
@@ -813,7 +813,7 @@ def pronosticoGeneral(request):
         model.compile(optimizer=tf.keras.optimizers.Adam(1),
                         loss='mean_squared_error')
         print("Entrenando el modelo")
-        epochs_hist = model.fit(X_train, y_train, epochs=8000)
+        epochs_hist = model.fit(X_train, y_train, epochs=5000)
 
         print("Evaluando el modelo entrenado")
         print("Keys:")
